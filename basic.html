@@ -1,0 +1,70 @@
+<html>
+<head>
+    <title>Starsheet Sample - Conference Schedule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.8/cdn.min.js"></script>
+    <link href="css/base.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Conference Schedule</h2>
+
+    <div x-data="schedule">
+
+        <div class="loading" x-show="loading">
+            Loading data...
+        </div>
+
+        <div x-show="!loading && !error" class="schedule">
+
+            <template x-for="session in data.schedule">
+                <div class="session" :class="`track-${session.track} type-${session.type}`">
+
+                    <div class="session-info">
+                        <span class="time" x-text="`${session.start_time} - ${session.end_time}`"></span>
+                        <h3 x-text="session.title"></h3>
+                        <p x-text="session.short_description"></p>
+                    </div>
+
+                    <template x-if="session.type === 'talk'">
+                        <div class="speaker">
+                            <img :src="`${imageBaseUrl()}/${session.speaker.photo.filename}`"></img>
+                            <div class="info">
+                                <span class="name" x-text="session.speaker.name"></span>
+                                <span class="company" x-text="session.speaker.company"></span>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('schedule', () => ({
+                dataUrl: 'https://demo.starsheet.app/schedule/live.json',
+                data: {},
+                loading: true,
+                error: null,
+                init() {
+                    this.loadRemoteData();
+                },
+                loadRemoteData() {
+                    fetch(this.dataUrl)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        this.data = json;
+                        this.loading = false;
+                    })
+                },
+                imageBaseUrl() {
+                    return this.dataUrl.substring(0, this.dataUrl.lastIndexOf('/')) + '/images'
+                }
+            }));
+        });
+    </script>
+</body>
+</html>

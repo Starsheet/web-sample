@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title>Starsheet Sample - Conference Schedule</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.14.8/cdn.min.js"></script>
+    <link href="css/base.css" rel="stylesheet" />
+    <link href="css/grid.css" rel="stylesheet" />
+</head>
+<body>
+    <h2>Conference Schedule</h2>
+
+    <div x-data="schedule">
+
+        <div class="loading" x-show="loading">
+            Loading data...
+        </div>
+
+        <div x-show="!loading && !error" class="schedule">
+
+            <span class="track-slot" aria-hidden="true" style="grid-column: track-1; grid-row: tracks;">Track 1</span>
+            <span class="track-slot" aria-hidden="true" style="grid-column: track-2; grid-row: tracks;">Track 2</span>
+            <span class="track-slot" aria-hidden="true" style="grid-column: track-3; grid-row: tracks;">Track 3</span>
+
+            <template x-for="session in data.schedule">
+                <div class="session" :class="`track-${session.track} type-${session.type}`" :style="`grid-row: time-${session.start_time.replace(':', '')} / time-${session.end_time.replace(':', '')};`">
+
+                    <div class="session-info">
+                        <span class="time" x-text="`${session.start_time} - ${session.end_time}`"></span>
+                        <h3 x-text="session.title"></h3>
+                        <p x-text="session.short_description"></p>
+                    </div>
+
+                    <template x-if="session.type === 'talk'">
+                        <div class="speaker">
+                            <img :src="`${imageBaseUrl()}/${session.speaker.photo.filename}`"></img>
+                            <div class="info">
+                                <span class="name" x-text="session.speaker.name"></span>
+                                <span class="company" x-text="session.speaker.company"></span>
+                            </div>
+                        </div>
+                    </template>
+
+                </div>
+            </template>
+
+            <template x-for="start_time in data.start_times">
+                <h2 class="time-slot" :style="`grid-row: time-${start_time.replace(':', '')};`" x-text="start_time" aria-hidden="true">9:00</h2>
+            </template>
+
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('schedule', () => ({
+                dataUrl: 'https://demo.starsheet.app/schedule/live.json',
+                data: {},
+                loading: true,
+                error: null,
+                init() {
+                    this.loadRemoteData();
+                },
+                loadRemoteData() {
+                    fetch(this.dataUrl)
+                    .then((response) => response.json())
+                    .then((json) => {
+                        this.data = json;
+                        this.data.start_times = [];
+                        this.data.tracks = [];
+                        this.data.schedule.forEach((session) => {
+                            if (!this.data.start_times.includes(session.start_time)) {
+                                this.data.start_times.push(session.start_time);
+                            }
+                            if (!this.data.tracks.includes(session.track)) {
+                                this.data.tracks.push(session.track);
+                            }
+                        });
+                        this.loading = false;
+                    })
+                },
+                imageBaseUrl() {
+                    return this.dataUrl.substring(0, this.dataUrl.lastIndexOf('/')) + '/images'
+                }
+            }));
+        });
+    </script>
+</body>
+</html>

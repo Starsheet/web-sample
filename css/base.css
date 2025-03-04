@@ -1,0 +1,85 @@
+body {
+    font-family: -system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.session {
+    padding: 0.7rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.7rem;
+}
+
+.session h3,
+.session p {
+    margin: 0;
+    margin-top: 0.3rem;
+}
+
+.session .time {
+    font-size: 0.7rem;
+}
+
+.session .speaker {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+
+
+.session .speaker img {
+    height: auto;
+    width: auto;
+    max-width: 3rem;
+    max-height: 3rem;
+
+
+}
+
+.session .speaker .name {
+    font-weight: bold;
+}
+
+.session .speaker .name,
+.session .speaker .company {
+    display: block;
+}
+
+.track-0 {
+    grid-column: track-1-start / track-3-end;
+    background-color: #FFD9A2;
+}
+
+.track-1 {
+    grid-column: track-1;
+    background-color: #C5ECFD;
+}
+
+.track-2 {
+    grid-column: track-2;
+    background-color: #BEF0C6;
+}
+
+.track-3 {
+    grid-column: track-3;
+    background-color: #FFC7D6;
+}
+
+.type-break {
+    background-color: #DDDDDD !important;
+}
+
+.time-slot {
+    padding: 0;
+    margin: 0;
+    grid-column: times;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/* Default Hidden on Mobile */
+.time-slot,
+.track-slot {
+    display: none
+}
