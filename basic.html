@@ -27,7 +27,7 @@
 
                     <template x-if="session.type === 'talk'">
                         <div class="speaker">
-                            <img :src="`${imageBaseUrl()}/${session.speaker.photo.filename}`"></img>
+                            <img :src="`${imageBaseUrl()}/${session.speaker.photo.filename}`">
                             <div class="info">
                                 <span class="name" x-text="session.speaker.name"></span>
                                 <span class="company" x-text="session.speaker.company"></span>
