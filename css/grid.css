@@ -56,3 +56,17 @@
 .track-3 {
     grid-column: track-3;
 }
+
+.time-slot {
+    padding: 0;
+    margin: 0;
+    grid-column: times;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+/* Default Hidden on Mobile */
+.time-slot,
+.track-slot {
+    display: none
+}

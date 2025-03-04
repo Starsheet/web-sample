@@ -26,8 +26,6 @@ body {
     margin-top: 0.5rem;
 }
 
-
-
 .session .speaker img {
     height: auto;
     width: auto;
@@ -68,18 +66,4 @@ body {
 
 .type-break {
     background-color: #DDDDDD !important;
-}
-
-.time-slot {
-    padding: 0;
-    margin: 0;
-    grid-column: times;
-    font-size: 0.8em;
-    text-align: center;
-}
-
-/* Default Hidden on Mobile */
-.time-slot,
-.track-slot {
-    display: none
 }
