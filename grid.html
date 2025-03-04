@@ -68,6 +68,8 @@
                         this.data = json;
                         this.data.start_times = [];
                         this.data.tracks = [];
+                        // We'll dynamically add times for every session start time alongside the schedule
+                        // when displayed as a grid. Prepare that data for use in the template
                         this.data.schedule.forEach((session) => {
                             if (!this.data.start_times.includes(session.start_time)) {
                                 this.data.start_times.push(session.start_time);
