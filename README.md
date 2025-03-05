@@ -166,7 +166,7 @@ We'll then update the speaker section in our template to display the image.
 
 Reloading the page will now show images from the source spreadsheet.
 
-![Screenshot showing the addition of speaker images](docs/images/initial-implementation-with-images.png)
+[<img src="docs/images/initial-implementation-with-images.png">](https://starsheet-web-sample.pages.dev/basic)
 
 ### Enhancing the layout for desktop
 
@@ -180,8 +180,7 @@ This requires the following additions:
 
 You can view the complete source code for the enhanced version [here](https://github.com/Starsheet/web-sample/blob/main/src/grid.html), which results in the following: 
 
-![Screenshot showing the schedule displayed as a grid](docs/images/schedule-grid.png)
-
+[<img src="docs/images/schedule-grid.png">](https://starsheet-web-sample.pages.dev/grid)
 
 To keep the tutorial code as simple as possible, there's a few limitations that would likely need to be resolved if this were a real application: 
 * The named grid-template-rows are hardcoded in grid.css so the layout would not adapt well if conference sessions are added beyond the current 12:30 finish time. 
