@@ -117,7 +117,7 @@ A [simple stylesheet](https://github.com/Starsheet/web-sample/blob/main/src/css/
 
 ### Adding images
 
-The source Google Sheet includes a speaker photo which we're not currently displaying. If you're subscribed to the 'Teams' tier, Starsheet will automatically  upload images from the source Google Sheet to S3/Cloudfront along with the data, and reference those images are URLs in the JSON feed. 
+The source Google Sheet includes a speaker photo which we're not currently displaying. If you're subscribed to the 'Teams' tier, Starsheet will automatically  upload images from the source Google Sheet to S3/CloudFront along with the data, and reference those images are URLs in the JSON feed. 
 
 Images are automatically uploaded to an `/images/` subdirectory, so if our data URL is loaded from `https://demo.starsheet.app/schedule/live.json` the associated images will be stored in `https://demo.starsheet.app/schedule/images/` (the directory itself is not browseable). 
 
@@ -184,6 +184,25 @@ You can view the complete source code for the enhanced version [here](https://gi
 To keep the tutorial code as simple as possible, there's a few limitations that would likely need to be resolved if this were a real application: 
 * The named grid-template-rows are hardcoded in grid.css so the layout would not adapt well if conference sessions are added beyond the current 12:30 finish time. 
 * The layout expects 3 tracks (with track 0 automatically spanning all tracks). 
-In both cases, dynamically generating the grid-template CSS in response to the input data should be relatively straightforward. 
 
+In a real world application dynamically generating the grid-template CSS in response to the input data should be relatively straightforward. 
 
+## Publishing workflow
+
+You'll note that the [demo](https://starsheet-web-sample.pages.dev/grid) has a gap in track 3 in the schedule at 11:30. This is demonstrating a feature of Starsheet that allows rows from the source spreadsheet to be not published to the JSON feed. 
+
+The source spreadsheet contains a column with the title `!hide`. Any rows with a positive value in that cell (ie. not an empty tickbox, empty cell, FALSE or 0) will not be output in the JSON. When the content was published to the live environment this row was ticked:
+
+![Screenshot of a Google Sheet showing a hidden row](docs/images/hidden-row.png)
+
+You can also see a `#notes` column. Any column name starting with a hash symbol is treated as an internal comment and also not output to the JSON. 
+
+Since that was published to the live environment, we've updated the data to unhide that row and published it to the development environment. Having separate environments allows updates to be tested in isolation from the live application. Free Starsheet accounts allow for 2 environments (Live and Development) but paid account allow any number of named environments to be created. 
+
+We can test this update by updating our page to instead load from https://demo.starsheet.app/schedule/development.json which will result in an additional session being shown on the schedule. 
+
+For the purposes of the demo, the development environment has been set to be publicly accessible. By default, all environments except for Live are set to private, requiring a signed URL to access the data. The Starsheet dashboard can generate a time-limited signed URL for you, or you can [generate your own](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). 
+
+Once you have tested your change in the development environment and happy for it to go live, you can publish it to the live environment from the Starsheet dashboard. 
+
+![Starsheet Dashboard Screenshot](docs/images/starsheet-projects-page-screenshot.png)
