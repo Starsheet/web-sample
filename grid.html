@@ -17,11 +17,13 @@
 
         <div x-show="!loading && !error" class="schedule">
 
+            <!-- Hardcoded to 3 tracks for the purposes of the tutorial -->
             <span class="track-slot" aria-hidden="true" style="grid-column: track-1; grid-row: tracks;">Track 1</span>
             <span class="track-slot" aria-hidden="true" style="grid-column: track-2; grid-row: tracks;">Track 2</span>
             <span class="track-slot" aria-hidden="true" style="grid-column: track-3; grid-row: tracks;">Track 3</span>
 
             <template x-for="session in data.schedule">
+                <!-- Dynamically create style attribute to render sessions in the appropriate time row in the grid -->
                 <div class="session" :class="`track-${session.track} type-${session.type}`" :style="`grid-row: time-${session.start_time.replace(':', '')} / time-${session.end_time.replace(':', '')};`">
 
                     <div class="session-info">
