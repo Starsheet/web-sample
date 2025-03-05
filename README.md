@@ -4,6 +4,8 @@ This sample project demonstrates how [Starsheet](https://starsheet.app) can be u
 
 ## What is Starsheet
 
+![Starsheet Dashboard Screenshot](docs/images/starsheet-projects-page-screenshot.png)
+
 [Starsheet](https://starsheet.app) is an online service that generates a JSON feed from a Google Sheet and publishes it to S3/CloudFront on your AWS account, essentially turning Google Sheets into a simple headless CMS, with no infrastructure to maintain and at the fraction of the cost of a managed service like Contentful. 
 
 The advantage of publishing it to your own AWS account is there's no artifical caps on bandwidth or visitors. You pay AWS usage fees directly so there's no markup, and in many cases will fall within free usage allowances offered by AWS. 
@@ -205,4 +207,3 @@ For the purposes of the demo, the development environment has been set to be pub
 
 Once you have tested your change in the development environment and happy for it to go live, you can publish it to the live environment from the Starsheet dashboard. 
 
-![Starsheet Dashboard Screenshot](docs/images/starsheet-projects-page-screenshot.png)
