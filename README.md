@@ -10,7 +10,7 @@ This sample project demonstrates how [Starsheet](https://starsheet.app) can be u
 
 The advantage of publishing it to your own AWS account is there's no artifical caps on bandwidth or visitors. You pay AWS usage fees directly so there's no markup, and in many cases will fall within free usage allowances offered by AWS. 
 
-## What we're building
+## What we're building in this sample project
 
 ![Image showing Google Sheet and published website side by side](docs/images/side-by-side.png)
 
@@ -20,7 +20,7 @@ There's two versions of the sample project created from this tutorial. A [basic 
 
 The complete source code is available [on Github](https://github.com/Starsheet/web-sample).
 
-## Building the website
+## Creating the website
 
 We'll start by consuming the already published JSON feed. 
 
@@ -203,7 +203,7 @@ Since that was published to the live environment, we've updated the data to unhi
 
 We can test this update by updating our page to instead load from https://demo.starsheet.app/schedule/development.json which will result in an additional session being shown on the schedule. 
 
-For the purposes of the demo, the development environment has been set to be publicly accessible. By default, all environments except for Live are set to private, requiring a signed URL to access the data. The Starsheet dashboard can generate a time-limited signed URL for you, or you can [generate your own](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). 
+For the purposes of the demo, the development environment has been set to be publicly accessible. By default, all environments except for Live are set to private, requiring a signed URL to access the data to prevent someone from accessing the data before you intend it to be publicly available. We recommend using signed URLs in your development environment. The Starsheet dashboard can generate a limited time signed URL for you, or you can [generate your own automatically](https://docs.aws.amazon.com/AmazonS3/latest/userguide/ShareObjectPreSignedURL.html). 
 
 Once you have tested your change in the development environment and happy for it to go live, you can publish it to the live environment from the Starsheet dashboard. 
 
